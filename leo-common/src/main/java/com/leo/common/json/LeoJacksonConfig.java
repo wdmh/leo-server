@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -11,6 +12,8 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import com.leo.common.base.LeoEnum;
+import com.leo.common.json.serializer.LeoEnumSerializer;
 import com.leo.util.constant.LocalDatePattern;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -65,6 +68,10 @@ public class LeoJacksonConfig {
 
         // Date 类型默认日期格式化
         objectMapper.setDateFormat(new SimpleDateFormat(LocalDatePattern.DATE_TIME_PATTERN));
+
+        // 枚举类序列化处理
+        SimpleModule enumModule = new SimpleModule().addSerializer(LeoEnum.class, new LeoEnumSerializer());
+        objectMapper.registerModule(enumModule);
 
         return objectMapper;
     }
