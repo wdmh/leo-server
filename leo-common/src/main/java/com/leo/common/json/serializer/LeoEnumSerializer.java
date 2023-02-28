@@ -20,8 +20,8 @@ public class LeoEnumSerializer extends JsonSerializer<LeoEnum> {
     @Override
     public void serialize(LeoEnum leoEnum, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeNumberField(CODE, leoEnum.getCode());
-        jsonGenerator.writeStringField(TEXT, leoEnum.getText());
+        jsonGenerator.writeNumberField(CODE, leoEnum.code());
+        jsonGenerator.writeStringField(TEXT, leoEnum.text());
         jsonGenerator.writeEndObject();
     }
 }

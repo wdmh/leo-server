@@ -5,7 +5,7 @@ package com.leo.common.result;
  */
 public interface LeoResultInfo {
 
-    int getCode();
+    int code();
 
-    String getMessage();
+    String message();
 }

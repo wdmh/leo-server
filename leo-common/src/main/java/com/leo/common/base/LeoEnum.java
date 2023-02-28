@@ -13,12 +13,12 @@ public interface LeoEnum {
      *
      * @return int code
      */
-    int getCode();
+    int code();
 
     /**
      * 获取text
      *
      * @return String text
      */
-    String getText();
+    String text();
 }

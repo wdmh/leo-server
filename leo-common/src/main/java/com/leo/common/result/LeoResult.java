@@ -26,18 +26,18 @@ public class LeoResult<T> {
     private T data;
 
     public static <T> LeoResult<T> ok() {
-        return new LeoResult<>(LeoResultCode.SUCCESS.getCode(), LeoResultCode.SUCCESS.getMessage(), null);
+        return new LeoResult<>(LeoResultCode.SUCCESS.code(), LeoResultCode.SUCCESS.message(), null);
     }
 
     public static <T> LeoResult<T> ok(T t) {
-        return new LeoResult<>(LeoResultCode.SUCCESS.getCode(), LeoResultCode.SUCCESS.getMessage(), t);
+        return new LeoResult<>(LeoResultCode.SUCCESS.code(), LeoResultCode.SUCCESS.message(), t);
     }
 
     public static <T> LeoResult<T> ok(LeoResultInfo lri) {
-        return new LeoResult<>(lri.getCode(), lri.getMessage(), null);
+        return new LeoResult<>(lri.code(), lri.message(), null);
     }
 
     public static <T> LeoResult<T> ok(LeoResultInfo lri, T t) {
-        return new LeoResult<>(lri.getCode(), lri.getMessage(), t);
+        return new LeoResult<>(lri.code(), lri.message(), t);
     }
 }

@@ -26,12 +26,12 @@ public enum LeoResultCode implements LeoResultInfo {
     private final String message;
 
     @Override
-    public int getCode() {
+    public int code() {
         return this.code;
     }
 
     @Override
-    public String getMessage() {
+    public String message() {
         return this.message;
     }
 }

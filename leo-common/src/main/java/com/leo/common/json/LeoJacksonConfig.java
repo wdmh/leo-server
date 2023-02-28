@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -69,9 +70,12 @@ public class LeoJacksonConfig {
         // Date 类型默认日期格式化
         objectMapper.setDateFormat(new SimpleDateFormat(LocalDatePattern.DATE_TIME_PATTERN));
 
-        // 枚举类序列化处理
-        SimpleModule enumModule = new SimpleModule().addSerializer(LeoEnum.class, new LeoEnumSerializer());
-        objectMapper.registerModule(enumModule);
+        // 序列化处理
+        SimpleModule simpleModule = new SimpleModule();
+        simpleModule.addSerializer(LeoEnum.class, new LeoEnumSerializer());
+        simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
+        simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
+        objectMapper.registerModule(simpleModule);
 
         return objectMapper;
     }

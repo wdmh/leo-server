@@ -23,18 +23,18 @@ public class LeoException extends RuntimeException implements LeoResultInfo {
     private String errorMessage;
 
     public LeoException(LeoResultInfo lri) {
-        super(lri.getMessage());
-        this.errorCode = lri.getCode();
-        this.errorMessage = lri.getMessage();
+        super(lri.message());
+        this.errorCode = lri.code();
+        this.errorMessage = lri.message();
     }
 
     @Override
-    public int getCode() {
+    public int code() {
         return this.errorCode;
     }
 
     @Override
-    public String getMessage() {
+    public String message() {
         return this.errorMessage;
     }
 }
