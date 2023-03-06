@@ -16,15 +16,13 @@ import java.util.List;
  */
 public class LeoBeanSerializerModifier extends BeanSerializerModifier {
 
-    private static final LeoCustomizeJsonSerializer.NullArrayJsonSerializer nullArrayJsonSerializer = new LeoCustomizeJsonSerializer.NullArrayJsonSerializer();
-
     @Override
     public List<BeanPropertyWriter> changeProperties(SerializationConfig config, BeanDescription beanDesc, List<BeanPropertyWriter> beanProperties) {
         for (BeanPropertyWriter beanPropertyWriter : beanProperties) {
             Class<?> clazz = beanPropertyWriter.getType().getRawClass();
             // 处理 Null 返回自定义
             if (ClassUtils.isArray(clazz)) {
-                beanPropertyWriter.assignNullSerializer(nullArrayJsonSerializer);
+                beanPropertyWriter.assignNullSerializer(new LeoCustomizeJsonSerializer.NullArrayJsonSerializer());
             }
             if (ClassUtils.isMap(clazz)) {
                 beanPropertyWriter.assignNullSerializer(new LeoCustomizeJsonSerializer.NullObjectJsonSerializer());

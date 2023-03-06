@@ -22,10 +22,10 @@ public class LeoException extends RuntimeException implements LeoResultInfo {
      */
     private String errorMessage;
 
-    public LeoException(LeoResultInfo lri) {
-        super(lri.message());
-        this.errorCode = lri.code();
-        this.errorMessage = lri.message();
+    public LeoException(LeoResultInfo leoResultInfo) {
+        super(leoResultInfo.message());
+        this.errorCode = leoResultInfo.code();
+        this.errorMessage = leoResultInfo.message();
     }
 
     @Override

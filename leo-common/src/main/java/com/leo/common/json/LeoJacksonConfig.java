@@ -19,7 +19,6 @@ import com.leo.util.constant.LocalDatePattern;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -37,8 +36,8 @@ public class LeoJacksonConfig {
 
     @Bean
     @Primary
-    public ObjectMapper objectMapper(Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder) {
-        ObjectMapper objectMapper = jackson2ObjectMapperBuilder.createXmlMapper(false).build();
+    public ObjectMapper objectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
 
         // 所有字段都显示
         objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
@@ -72,9 +71,12 @@ public class LeoJacksonConfig {
 
         // 序列化处理
         SimpleModule simpleModule = new SimpleModule();
+
         simpleModule.addSerializer(LeoEnum.class, new LeoEnumSerializer());
+
         simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
         simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
+
         objectMapper.registerModule(simpleModule);
 
         return objectMapper;
