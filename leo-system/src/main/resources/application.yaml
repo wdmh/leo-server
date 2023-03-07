@@ -11,21 +11,26 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-#---------- ---------- 接口文档配置 ---------- ----------#
+#-------------------- 接口文档配置 --------------------#
 springdoc:
   swagger-ui:
     disable-swagger-default-url: false
   api-docs:
     enabled: true
+  # 分组管理
   group-configs:
     - group: system
       packages-to-scan: com.leo.system.controller
-    - group: test
-      packages-to-scan: com.leo.system.controller
 knife4j:
+  # knife4j增强模式开关
   enable: true
   setting:
-    enable-open-api: false
+    # 接口的版本控制开关
     enable-version: true
+    # OpenApi结构显示开关
+    enable-open-api: false
+    # Footer显示开关
     enable-footer: false
-#---------- ---------- 接口文档配置 ---------- ----------#
+    # SwaggerModel显示开关
+    enable-swagger-models: false
+#-------------------- 接口文档配置 --------------------#

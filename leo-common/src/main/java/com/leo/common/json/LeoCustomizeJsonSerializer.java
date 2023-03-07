@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.leo.util.constant.LocalDatePattern;
-import com.leo.util.constant.StringConstant;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -86,7 +85,7 @@ public class LeoCustomizeJsonSerializer {
 
         @Override
         public void serialize(Object o, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-            jsonGenerator.writeString(StringConstant.EMPTY_STR);
+            jsonGenerator.writeString("");
         }
     }
 }
