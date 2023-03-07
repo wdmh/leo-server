@@ -10,3 +10,22 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#---------- ---------- 接口文档配置 ---------- ----------#
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: false
+  api-docs:
+    enabled: true
+  group-configs:
+    - group: system
+      packages-to-scan: com.leo.system.controller
+    - group: test
+      packages-to-scan: com.leo.system.controller
+knife4j:
+  enable: true
+  setting:
+    enable-open-api: false
+    enable-version: true
+    enable-footer: false
+#---------- ---------- 接口文档配置 ---------- ----------#

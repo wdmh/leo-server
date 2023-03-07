@@ -33,7 +33,7 @@
 		<mysql-connector-j.version>8.0.32</mysql-connector-j.version>
 		<mybatis-plus.version>3.5.3</mybatis-plus.version>
 		<mapstruct.version>1.5.3.Final</mapstruct.version>
-		<springdoc.version>2.0.2</springdoc.version>
+		<knife4j.version>4.0.0</knife4j.version>
 	</properties>
 
 	<dependencyManagement>
@@ -110,10 +110,10 @@
 				<version>${mapstruct.version}</version>
 				<scope>compile</scope>
 			</dependency>
-		   	<dependency>
-				<groupId>org.springdoc</groupId>
-				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-				<version>${springdoc.version}</version>
+			<dependency>
+				<groupId>com.github.xiaoymin</groupId>
+				<artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+				<version>${knife4j.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

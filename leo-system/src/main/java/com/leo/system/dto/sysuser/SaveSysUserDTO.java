@@ -6,19 +6,19 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Data
 @Schema(name = "保存用户 入参")
+@Data
 public class SaveSysUserDTO {
 
-    @NotBlank
     @Schema(description = "姓名", example = "张三")
+    @NotBlank
     private String name;
 
-    @NotNull
     @Schema(description = "性别", example = "0")
+    @NotNull
     private GenderEnum gender;
 
-    @NotBlank
     @Schema(description = "手机号", example = "18212341234")
+    @NotBlank
     private String phone;
 }
