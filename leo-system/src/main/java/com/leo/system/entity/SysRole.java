@@ -6,20 +6,17 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * 系统用户类
+ * 系统角色类
  *
  * @author liujie
  */
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SysUser extends LeoEntity {
+public class SysRole extends LeoEntity {
 
-    // 姓名
-    private String userName;
-    // 性别
-    private Integer gender;
-    // 手机号
-    private String phone;
-
+    // 角色名称
+    private String roleName;
+    // 使用状态(0:未启用,1:已启用,2:已停用)
+    private Integer useStatus;
 }

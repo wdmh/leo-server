@@ -6,6 +6,8 @@ import org.mapstruct.TargetType;
 /**
  * Leo System mapstruct基础转换类
  * 1. 实现LeoEnum与Integer之间的互相转换
+ *
+ * @author liujie
  */
 public interface LeoConvert {
 

@@ -1,6 +1,6 @@
 package com.leo.system.vo.sysuser;
 
-import com.leo.system.enums.GenderEnum;
+import com.leo.system.enums.Gender;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,10 +14,10 @@ public class SysUserVO {
     private Long id;
 
     @Schema(description = "姓名")
-    private String name;
+    private String userName;
 
     @Schema(description = "性别")
-    private GenderEnum gender;
+    private Gender gender;
 
     @Schema(description = "手机号")
     private String phone;

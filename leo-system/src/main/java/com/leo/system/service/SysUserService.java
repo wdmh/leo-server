@@ -16,22 +16,22 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SysUserService {
 
-    private final SysUserMapper sysUserMapper;
+    private final SysUserMapper userMapper;
 
-    private final SysUserConvert sysUserConvert = SysUserConvert.INSTANCE;
+    private final SysUserConvert userConvert = SysUserConvert.INSTANCE;
 
     public void save(SaveSysUserDTO saveSysUserDTO) {
         SysUser sysUser = SysUserConvert.INSTANCE.convert(saveSysUserDTO);
-        int saveCount = sysUserMapper.insert(sysUser);
 
+        int saveCount = userMapper.insert(sysUser);
         if (saveCount != 1) {
             throw new LeoException(LeoResultCode.INSERT_DATA_ERROR);
         }
     }
 
     public SysUserVO getById(Long id) {
-        SysUser sysUser = sysUserMapper.selectById(id);
+        SysUser sysUser = userMapper.selectById(id);
 
-        return sysUserConvert.convert(sysUser);
+        return userConvert.convert(sysUser);
     }
 }
