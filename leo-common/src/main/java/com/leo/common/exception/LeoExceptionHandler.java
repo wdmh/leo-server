@@ -156,6 +156,6 @@ public class LeoExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public LeoResult exceptionHandler(Exception e) {
         log.error("ExceptionStackTrace", e);
-        return LeoResult.ok(LeoResultCode.SERVER_ERROR, e.getMessage());
+        return LeoResult.ok(LeoResultCode.SERVER_ERROR);
     }
 }

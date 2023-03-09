@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
@@ -19,6 +18,7 @@ import com.leo.util.constant.LocalDatePattern;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -36,8 +36,8 @@ public class LeoJacksonConfig {
 
     @Bean
     @Primary
-    public ObjectMapper objectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
+    public ObjectMapper objectMapper(Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder) {
+        ObjectMapper objectMapper = jackson2ObjectMapperBuilder.createXmlMapper(false).build();
 
         // 所有字段都显示
         objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
@@ -54,23 +54,20 @@ public class LeoJacksonConfig {
         // 定制返回结果
         // objectMapper.setSerializerFactory(objectMapper.getSerializerFactory().withSerializerModifier(new LeoBeanSerializerModifier()));
 
-        // LocalDateTime 类型默认格式化
-        JavaTimeModule javaTimeModule = new JavaTimeModule();
-        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(LocalDatePattern.DATE_TIME_FORMAT));
-        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(LocalDatePattern.DATE_TIME_FORMAT));
-
-        javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(LocalDatePattern.DATE_FORMAT));
-        javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(LocalDatePattern.DATE_FORMAT));
-
-        javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(LocalDatePattern.TIME_FORMAT));
-        javaTimeModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(LocalDatePattern.TIME_FORMAT));
-        objectMapper.registerModule(javaTimeModule);
-
         // Date 类型默认日期格式化
         objectMapper.setDateFormat(new SimpleDateFormat(LocalDatePattern.DATE_TIME_PATTERN));
 
         // 序列化处理
         SimpleModule simpleModule = new SimpleModule();
+
+        simpleModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(LocalDatePattern.DATE_TIME_FORMAT));
+        simpleModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(LocalDatePattern.DATE_TIME_FORMAT));
+
+        simpleModule.addSerializer(LocalDate.class, new LocalDateSerializer(LocalDatePattern.DATE_FORMAT));
+        simpleModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(LocalDatePattern.DATE_FORMAT));
+
+        simpleModule.addSerializer(LocalTime.class, new LocalTimeSerializer(LocalDatePattern.TIME_FORMAT));
+        simpleModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(LocalDatePattern.TIME_FORMAT));
 
         simpleModule.addSerializer(LeoEnum.class, new LeoEnumSerializer());
 
