@@ -3,6 +3,7 @@ package com.leo.common.exception;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.leo.common.result.LeoResult;
 import com.leo.common.result.LeoResultCode;
+import com.leo.util.StringUtils;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -96,6 +98,12 @@ public class LeoExceptionHandler {
             errMsg = references.stream()
                     .map((re) -> re == null ? "null" : re.getFieldName() + ": 参数类型错误")
                     .collect(Collectors.joining(", "));
+        }
+        if (rootCause instanceof DateTimeParseException) {
+            String time = ((DateTimeParseException) rootCause).getParsedString();
+            if (StringUtils.isNotBlank(time)) {
+                errMsg = time + ": 时间格式错误";
+            }
         }
         return LeoResult.ok(LeoResultCode.BAD_REQUEST, errMsg);
 

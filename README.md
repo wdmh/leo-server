@@ -23,5 +23,6 @@ Leo System Server
 ## 注意
 
 - 参数校验方法如@NotNull有默认错误提示信息，如无特殊需求，无需重写message
-- 继承LeoEnum的枚举类型，如果需要在swagger接口文档页面进行完全内容展示，需要重写toString方法
+- ~~继承LeoEnum的枚举类型，如果需要在swagger接口文档页面进行完全内容展示，需要重写toString方法~~
+  - (通过重写io.swagger.v3.core.converter.ModelConverter实现类，避免每个继承LeoEnum枚举都需要重写toString方法)
 - knife4j现版本存在bug，无法自动提供配置提示
